@@ -11,7 +11,7 @@ class MovieController extends Controller
     public function homepage(){
         //untuk membuat halaman cuma 6 slide
         $movies = Movie::latest()->paginate(6);
-        return view('homepage', compact('movies'));
+        return view('homepage', compact('movie'));
     }
      // Menampilkan detail movie berdasarkan ID
     public function show($id)
