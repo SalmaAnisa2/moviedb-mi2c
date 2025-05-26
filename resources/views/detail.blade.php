@@ -4,7 +4,7 @@
 <div class="container mt-4 mb-5">
     <div class="row">
         <div class="col-md-5">
-            <img src="{{ $movie->cover_image }}" alt="{{ $movie->title }}" class="img-fluid rounded shadow-sm">
+            <img src="{{asset('storage/'.$movie->cover_image)}}" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-7">
             <h3>{{ $movie->title }}</h3>
@@ -21,7 +21,7 @@
             @if (!empty($movie->year))
                 <p><strong>Year:</strong> {{ $movie->year }}</p>
             @endif
-            <a href="{{ route('homepage') }}" class="btn btn-success mt-3">Back</a>
+            <a href="" class="btn btn-success mt-3">Back</a>
         </div>
     </div>
 </div>

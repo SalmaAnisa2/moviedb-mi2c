@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MovieController extends Controller
 {
@@ -18,6 +20,45 @@ class MovieController extends Controller
     {
         $movie = Movie::findOrFail($id);
         return view('detail', compact('movie'));
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+        return view('create_movie', compact('categories'));
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'synopsis' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'year' => 'required|integer',
+            'actors' => 'required|string',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Simpan file gambar ke storage/public/covers
+        $imagePath = $request->file('cover_image')->store('covers', 'public');
+
+        // Generate slug dari title
+        $slug = Str::slug($request->title);
+
+        // Simpan data ke database dengan mass assignment
+        Movie::create([
+            'title' => $request->title,
+            'slug' => $slug,
+            'synopsis' => $request->synopsis,
+            'category_id' => $request->category_id,
+            'year' => $request->year,
+            'actors' => $request->actors,
+            'cover_image' => 'storage/' . $imagePath,
+        ]);
+
+            return redirect('/')->with('success', 'Movie created successfully!');
+
     }
     
 

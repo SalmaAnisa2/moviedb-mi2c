@@ -9,5 +9,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MovieController::class, 'homepage']);
 
-Route::get('/movie/{id}', [MovieController::class, 'show'])->name('movie.detail');
+Route::get('/detail-movie/{id}', [MovieController::class, 'show']);
+
+Route::get('/create-movie', [MovieController::class, 'create']);
+
+Route::post('/movie/store', ['MovieController::class, store']);
 
