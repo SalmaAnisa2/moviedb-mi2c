@@ -18,9 +18,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+        @auth
         <li class="nav-item">
           <a class="nav-link" href="/create-movie">Input Movie</a>
         </li>
+        @endauth
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -29,7 +31,13 @@
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li>
+              <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="btn btn-linktext-decoration-none text-white">Logout
+                </button>
+              </form>
+            </li>
             </ul>
         </li>
         </ul>

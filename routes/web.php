@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MovieController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
@@ -11,7 +13,12 @@ Route::get('/', [MovieController::class, 'homepage']);
 
 Route::get('/detail-movie/{id}', [MovieController::class, 'show']);
 
-Route::get('/create-movie', [MovieController::class, 'create']);
+Route::get('/create-movie', [MovieController::class, 'create'])->middleware('auth');
 
-Route::post('/movie/store', ['MovieController::class, store']);
+Route::post('/movie/store', ['MovieController::class, store'])->middleware('auth');
 
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login')->middleware('guest');
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout']);

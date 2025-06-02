@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    
     public function run(): void
     {
         // User::factory(10)->create();
@@ -21,7 +20,8 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call(CategorySeeder::class);
-        Movie::factory(50)->create();
+        
+        //$this->call(CategorySeeder::class);
+        //Movie::factory(50)->create();
     }
 }
